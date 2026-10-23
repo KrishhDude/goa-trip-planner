@@ -29,18 +29,24 @@
     }
     * { box-sizing: border-box; }
     body { isolation: isolate; margin: 0; min-height: 100vh; color: var(--ink); background: var(--paper); font-family: var(--sans); font-size: 14px; line-height: 1.5; }
-    .page-backdrop { position: fixed; z-index: -1; inset: 0; background: url("https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=2200&q=85") center 54% / cover no-repeat; }
-    .page-backdrop::after { content: ""; position: absolute; inset: 0; background: rgba(239, 243, 238, .82); }
+    .page-backdrop { position: fixed; z-index: -1; inset: 0; overflow: hidden; }
+    .page-backdrop::before { content: ""; position: absolute; inset: 0; background: url("goa-beach.png") center 51% / cover no-repeat; transform: scale(1.08, -1.08) translate(-3%, -4%); }
+    .page-backdrop::after { content: ""; position: absolute; inset: 0; background: rgba(239, 243, 238, .16); }
     button { color: inherit; font: inherit; }
     .shell { width: min(1160px, calc(100% - 52px)); margin: 0 auto; }
-    .topbar { height: 72px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--line); }
-    .brand { display: flex; align-items: center; gap: 10px; font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+    .topbar { height: 72px; display: flex; align-items: center; justify-content: space-between; margin-top: 8px; padding: 0 18px; border: 1px solid rgba(255,255,255,.48); border-radius: 14px; background: rgba(239,247,241,.32); box-shadow: 0 8px 30px rgba(20,38,29,.1), inset 0 1px 0 rgba(255,255,255,.62); backdrop-filter: blur(24px) saturate(155%); -webkit-backdrop-filter: blur(24px) saturate(155%); }
+    .brand { display: flex; align-items: center; gap: 10px; color: #d6d6d6; font-size: 12px; font-weight: 800; letter-spacing: .08em; text-shadow: 0 1px 4px rgba(17,38,27,.5); text-transform: uppercase; }
     .brand-mark { display: grid; width: 32px; height: 32px; place-items: center; border-radius: 50%; background: var(--green-dark); color: white; font-size: 13px; }
-    .trip-date { color: var(--muted); font-size: 12px; }
-    main { padding: 42px 0 66px; }
-    .intro { display: flex; align-items: end; justify-content: space-between; gap: 22px; margin-bottom: 27px; }
-    h1 { margin: 0; font-size: clamp(34px, 5vw, 53px); font-weight: 700; letter-spacing: 0; line-height: 1.08; }
-    .intro-note { margin: 9px 0 0; color: var(--muted); font-size: 13px; }
+    .trip-date { color: #fff; font-size: 12px; font-weight: 600; text-shadow: 0 1px 4px rgba(17,38,27,.5); }
+    main { padding: 30px 0 66px; }
+    .section-tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; width: min(480px, 100%); margin: 0 auto 22px; padding: 4px; border: 1px solid rgba(255,255,255,.62); border-radius: 8px; background: rgba(239,247,241,.48); box-shadow: 0 8px 24px rgba(20,38,29,.08); backdrop-filter: blur(16px) saturate(145%); -webkit-backdrop-filter: blur(16px) saturate(145%); }
+    .section-tabs button { min-height: 40px; border: 0; border-radius: 5px; background: transparent; color: #44554a; cursor: pointer; font-size: 12px; font-weight: 800; transition: background .18s, color .18s, box-shadow .18s; }
+    .section-tabs button:hover { background: rgba(255,255,255,.42); }
+    .section-tabs button[aria-selected="true"] { background: rgba(255,255,255,.86); color: var(--green-dark); box-shadow: 0 2px 8px rgba(32,42,37,.1); }
+    .section-tabs button:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
+    .tab-panel[hidden] { display: none; }
+    .placeholder-panel { min-height: 190px; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.8); border-radius: 8px; background: var(--panel); box-shadow: 0 14px 44px rgba(37,54,44,.065); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
+    .placeholder-panel p { margin: 0; color: #45574b; font-size: 15px; font-weight: 700; }
     .people-count { flex: 0 0 auto; padding: 10px 13px; border: 1px solid var(--line); border-radius: 5px; background: rgba(255,255,255,.45); color: var(--green-dark); font-size: 11px; font-weight: 800; }
     .trip-panel { overflow: hidden; border: 1px solid rgba(255,255,255,.8); border-radius: 8px; background: var(--panel); box-shadow: 0 14px 44px rgba(37, 54, 44, .065); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
     .trip-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 17px 22px; border-bottom: 1px solid var(--line); }
@@ -115,9 +121,9 @@
     [hidden] { display: none !important; }
     @media (max-width: 720px) {
       .shell { width: min(100% - 30px, 560px); }
-      .topbar { height: 60px; }
+      .topbar { height: 60px; padding-inline: 11px; }
       main { padding: 30px 0 45px; }
-      .intro { align-items: start; }
+      .section-tabs { margin-bottom: 16px; }
       .trip-toolbar { padding: 13px; }
       .trip-tabs { gap: 2px; }
       .trip-tabs button { padding: 0 9px; font-size: 10px; }
@@ -166,13 +172,13 @@
     <span class="trip-date">02 — 06 December</span>
   </header>
   <main class="shell">
-    <section class="intro" aria-labelledby="page-title">
-      <div>
-        <h1 id="page-title">Goa, together.</h1>
-        <p class="intro-note">Both journeys, all nine travellers, one easy view.</p>
-      </div>
-    </section>
+    <nav class="section-tabs" role="tablist" aria-label="Trip sections">
+      <button type="button" role="tab" id="tab-train" aria-selected="true" aria-controls="panel-train" tabindex="0">Train</button>
+      <button type="button" role="tab" id="tab-stay" aria-selected="false" aria-controls="panel-stay" tabindex="-1">Stay</button>
+      <button type="button" role="tab" id="tab-itinerary" aria-selected="false" aria-controls="panel-itinerary" tabindex="-1">Itinerary</button>
+    </nav>
 
+    <section class="tab-panel" id="panel-train" role="tabpanel" aria-labelledby="tab-train">
     <section class="trip-panel" aria-label="Confirmed train bookings">
       <div class="trip-toolbar">
         <div class="trip-tabs" role="group" aria-label="Choose train journey">
@@ -205,6 +211,14 @@
         <div class="coach-shell"><div class="coach-doors"><span>Coach entry / exit</span><span>Coach entry / exit</span></div><div class="coach"><div class="coach-bays" id="coach-bays"></div></div><div class="coach-end"><span>Coach entry / exit</span><span>Coach entry / exit</span></div></div>
         <div class="map-footnote"><span><strong id="highlight-count">9 berths highlighted</strong> · Your group is outlined.</span><span>Coach <strong id="coach-label">S5</strong></span></div>
       </div></div>
+    </section>
+    </section>
+
+    <section class="tab-panel placeholder-panel" id="panel-stay" role="tabpanel" aria-labelledby="tab-stay" hidden>
+      <p>To be confirmed</p>
+    </section>
+    <section class="tab-panel placeholder-panel" id="panel-itinerary" role="tabpanel" aria-labelledby="tab-itinerary" hidden>
+      <p>To be confirmed</p>
     </section>
   </main>
   <footer class="shell">Seat assignments as provided in the shared trip details.</footer>
@@ -277,7 +291,33 @@
     const detailsToggle = document.querySelector("#details-toggle");
     const visualToggle = document.querySelector("#visual-toggle");
     const visualSection = document.querySelector("#visual-section");
+    const sectionTabs = Array.from(document.querySelectorAll('[role="tab"]'));
+    const sectionPanels = sectionTabs.map((tab) => document.querySelector(`#${tab.getAttribute("aria-controls")}`));
     let activeJourney = "outbound";
+
+    function selectSection(index, moveFocus = false) {
+      sectionTabs.forEach((tab, tabIndex) => {
+        const selected = tabIndex === index;
+        tab.setAttribute("aria-selected", String(selected));
+        tab.tabIndex = selected ? 0 : -1;
+        sectionPanels[tabIndex].hidden = !selected;
+      });
+      if (moveFocus) sectionTabs[index].focus();
+    }
+
+    sectionTabs.forEach((tab, index) => {
+      tab.addEventListener("click", () => selectSection(index));
+      tab.addEventListener("keydown", (event) => {
+        let nextIndex = index;
+        if (event.key === "ArrowRight") nextIndex = (index + 1) % sectionTabs.length;
+        else if (event.key === "ArrowLeft") nextIndex = (index - 1 + sectionTabs.length) % sectionTabs.length;
+        else if (event.key === "Home") nextIndex = 0;
+        else if (event.key === "End") nextIndex = sectionTabs.length - 1;
+        else return;
+        event.preventDefault();
+        selectSection(nextIndex, true);
+      });
+    });
 
     function renderJourney(key) {
       activeJourney = key;
