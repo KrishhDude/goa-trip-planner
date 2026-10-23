@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#e9eee9">
   <meta name="description" content="Confirmed train details and sleeper berths for the Goa trip.">
-  <title>Goa, together | Train seats</title>
+  <title>GOAAA</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -29,9 +29,10 @@
     }
     * { box-sizing: border-box; }
     body { isolation: isolate; margin: 0; min-height: 100vh; color: var(--ink); background: var(--paper); font-family: var(--sans); font-size: 14px; line-height: 1.5; }
-    .page-backdrop { position: fixed; z-index: -1; inset: 0; overflow: hidden; }
+    .page-backdrop { position: fixed; z-index: 0; inset: 0; overflow: hidden; pointer-events: none; }
     .page-backdrop::before { content: ""; position: absolute; inset: 0; background: url("goa-beach.png") center 51% / cover no-repeat; transform: scale(1.08, -1.08) translate(-3%, -4%); }
     .page-backdrop::after { content: ""; position: absolute; inset: 0; background: rgba(239, 243, 238, .16); }
+    .topbar, main, footer { position: relative; z-index: 1; }
     button { color: inherit; font: inherit; }
     .shell { width: min(1160px, calc(100% - 52px)); margin: 0 auto; }
     .topbar { height: 72px; display: flex; align-items: center; justify-content: space-between; margin-top: 8px; padding: 0 18px; border: 1px solid rgba(255,255,255,.48); border-radius: 14px; background: rgba(239,247,241,.32); box-shadow: 0 8px 30px rgba(20,38,29,.1), inset 0 1px 0 rgba(255,255,255,.62); backdrop-filter: blur(24px) saturate(155%); -webkit-backdrop-filter: blur(24px) saturate(155%); }
@@ -104,7 +105,7 @@
     .coach-bays { display: grid; grid-template-columns: 1fr; gap: 6px; }
     .bay-row { display: grid; grid-template-columns: minmax(0, 1fr) 7px minmax(132px, .42fr); gap: 5px; align-items: stretch; }
     .bay { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(30px, auto)); gap: 3px; padding: 3px; border: 1px solid rgba(37,54,44,.14); border-radius: 5px; background: rgba(255,255,255,.5); }
-    .berth { position: relative; min-width: 0; min-height: 30px; display: grid; grid-template-columns: 1fr auto; grid-template-rows: 1fr auto; align-content: center; align-items: center; justify-items: center; gap: 0 3px; padding: 2px 3px; border: 1px solid rgba(35,48,39,.12); border-radius: 3px; background: #e2e7e2; color: #34453a; font: 10px var(--mono); transition: transform .18s, box-shadow .18s, filter .18s; }
+    .berth { position: relative; min-width: 0; min-height: 30px; display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: 1fr auto; align-content: center; align-items: center; justify-items: center; gap: 0 3px; padding: 2px 7px; border: 1px solid rgba(35,48,39,.12); border-radius: 3px; background: #e2e7e2; color: #34453a; font: 10px var(--mono); transition: transform .18s, box-shadow .18s, filter .18s; }
     .berth.lower, .berth.middle, .berth.upper, .berth.side-lower, .berth.side-upper { background: #e2e7e2; }
     .berth-kind { color: #68766c; font-size: 8px; font-weight: 700; }
     .side-walkway { border-left: 1px dashed #aebbb1; }
@@ -112,11 +113,11 @@
     .coach-seam { position: relative; display: flex; align-items: center; gap: 10px; min-height: 22px; padding: 0 8px; color: #77847a; font: 8px var(--mono); }
     .coach-seam::before, .coach-seam::after { content: ""; flex: 1; border-top: 1px dashed #aebbb1; }
     .berth.is-occupied { z-index: 1; border: 2px solid #65766a; box-shadow: 0 0 0 2px white, 0 4px 12px rgba(41,55,45,.2); transform: translateY(-2px) scale(1.045); color: #202a25; font-weight: 700; }
-    .berth-owner { max-width: 100%; overflow: hidden; color: #415248; font: 700 7px var(--sans); text-overflow: ellipsis; white-space: nowrap; }
+    .berth-owner { grid-column: 1 / -1; max-width: 100%; overflow: hidden; color: #415248; font: 700 7px var(--sans); text-overflow: ellipsis; white-space: nowrap; }
     .gangway { position: relative; display: flex; align-items: center; justify-content: center; border-left: 1px dashed #c5cdc5; border-right: 1px dashed #c5cdc5; color: #9ba69d; font-size: 8px; writing-mode: vertical-rl; }
     .coach-end { max-width: 690px; display: flex; justify-content: space-between; margin: 8px auto 0; color: #8a968c; font-size: 8px; }
-    .map-footnote { display: flex; justify-content: space-between; gap: 12px; margin-top: 10px; color: var(--muted); font-size: 9px; }
-    .map-footnote strong { color: var(--green-dark); }
+    .map-footnote { display: flex; justify-content: space-between; gap: 12px; margin-top: 10px; color: #d3dbd4; font-size: 9px; text-shadow: 0 1px 3px rgba(24,38,29,.68); }
+    .map-footnote strong { color: #e5ebe6; }
     footer { padding: 0 20px 27px; color: var(--muted); text-align: center; font-size: 10px; }
     [hidden] { display: none !important; }
     @media (max-width: 720px) {
@@ -157,7 +158,8 @@
       .trip-tabs button { padding-inline: 6px; }
       .traveler-list { grid-template-columns: 1fr 1fr; }
       .bay-row { grid-template-columns: minmax(0, 1fr) 4px minmax(78px, .42fr); }
-      .berth, .side-pair { min-height: 24px; padding-inline: 1px; font-size: 8px; }
+      .berth, .side-pair { min-height: 24px; font-size: 8px; }
+      .berth { padding-inline: 5px; }
       .berth-owner { font-size: 5px; }
     }
     @media (prefers-reduced-motion: reduce) {
@@ -204,10 +206,6 @@
 
     <section class="visual-section" id="visual-section" aria-label="Sleeper carriage seating plan" aria-hidden="true">
       <div class="visual-clip"><div class="visual-content">
-        <div class="map-head">
-          <div><h2>The sleeper coach</h2><p>Berths are numbered in the same order as the carriage plan.</p></div>
-          <div class="legend" aria-label="Berth type legend"><span>L · Lower</span><span>M · Middle</span><span>U · Upper</span><span>SL · Side lower</span><span>SU · Side upper</span></div>
-        </div>
         <div class="coach-shell"><div class="coach-doors"><span>Coach entry / exit</span><span>Coach entry / exit</span></div><div class="coach"><div class="coach-bays" id="coach-bays"></div></div><div class="coach-end"><span>Coach entry / exit</span><span>Coach entry / exit</span></div></div>
         <div class="map-footnote"><span><strong id="highlight-count">9 berths highlighted</strong> · Your group is outlined.</span><span>Coach <strong id="coach-label">S5</strong></span></div>
       </div></div>
@@ -221,7 +219,6 @@
       <p>To be confirmed</p>
     </section>
   </main>
-  <footer class="shell">Seat assignments as provided in the shared trip details.</footer>
   <script>
     const journeys = {
       outbound: {
